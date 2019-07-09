@@ -13,6 +13,9 @@ git checkout -- readme.txt
 删除文件:
 git rm test.txt
 
+删除文件和目录
+git rm -r -n
+
 查看日志：
 git log --pretty=oneline
 git log --graph --pretty=oneline --abbrev-commit
@@ -88,3 +91,36 @@ git rebase
 
 删除远程分支: 
 git push origin --delete [branchname]
+
+打标签（标签打在最近一次commit上）：
+git tag v1.0
+
+给历史commit打标签， -m参数是标签的说明
+$ git tag v0.9 f52c633
+$ git tag -a v0.1 -m "version 0.1 released" 1094adb
+
+查看标签：
+git tag
+
+查看标签详情：
+git show v0.9
+
+删除标签：
+git tag -d v0.1
+
+把指定标签推到github
+git push origin v1.0
+
+一次性推送全部标签
+git push origin --tags
+
+
+删除远程标签：
+git tag -d v0.9				（先删除本地标签）
+git push origin :refs/tags/v0.9		（后删除远程标签）
+
+强行添加文件
+git add -f App.class
+
+检查gitignore文件是否有错
+git check-ignore
