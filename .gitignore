@@ -1,7 +1,11 @@
-﻿# Windows:
+﻿# Windows files:
 Thumbs.db
 ehthumbs.db
 Desktop.ini
+
+#Windows folders:
+obj
+bin
 
 # Python:
 *.py[cod]
