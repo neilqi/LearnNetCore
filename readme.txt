@@ -85,3 +85,6 @@ git branch --set-upstream-to=origin/dev dev
 rebase操作可以把本地未push的分叉提交历史整理成直线；
 rebase的目的是使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比
 git rebase
+
+删除远程分支: 
+git push origin --delete [branchname]
