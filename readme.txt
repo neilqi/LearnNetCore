@@ -75,3 +75,8 @@ git stash pop
 查看远程库的信息
 git remote -v
 
+从远程抓取，相当于svn的更新
+git pull
+
+指定本地dev分支与远程origin/dev分支的链接
+git branch --set-upstream-to=origin/dev dev
