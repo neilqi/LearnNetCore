@@ -1,0 +1,22 @@
+﻿@model IEnumerable<string>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Language Features</title>
+</head>
+<body>
+    <ul>
+        <!-- controll的return view返回的是一个RazorPage.Model,
+        而Model的具体类型由开头的@model IEnumerable引用决定。-->
+        @foreach (string s in Model)
+        {
+            <li>@s</li>
+        }
+    </ul>
+</body>
+</html>
