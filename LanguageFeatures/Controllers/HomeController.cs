@@ -13,6 +13,7 @@ namespace LanguageFeatures.Controllers
 
         public IActionResult Index()
         {
+            // 语法糖 ?  ?? 实例 字符串自动补全
             //List<string> results = new List<string>();
             //foreach (Product p in Product.GetProducts())
             //{
@@ -99,20 +100,44 @@ namespace LanguageFeatures.Controllers
                 return prod?.Name?[0] == 'S';
             };
 
-            //以下三种方式等价
-            decimal priceFilterTotal = productArray.Filter(FilterByPrice).TotalPrices();
-            decimal priceFilterTotal2 = productArray.Filter(p => (p?.Price ?? 0) >= 20).TotalPrices();
-            decimal nameFileterTotal = productArray.Filter(nameFilter).TotalPrices();
-            return View("Index", new string[] {
-                $"Price Total: {priceFilterTotal:C2}",
-                $"Name Total: {nameFileterTotal:C2}" });
+            //以下三种方式等价，使用代理或lambda表达式
+            //decimal priceFilterTotal = productArray.Filter(FilterByPrice).TotalPrices();
+            //decimal priceFilterTotal2 = productArray.Filter(p => (p?.Price ?? 0) >= 20).TotalPrices();
+            //decimal nameFileterTotal = productArray.Filter(nameFilter).TotalPrices();
+            //return View("Index", new string[] {
+            //    $"Price Total: {priceFilterTotal:C2}",
+            //    $"Name Total: {nameFileterTotal:C2}" });
+
+            //Linq
+            //return View(Product.GetProducts().Select(p => p?.Name));
+
+            //匿名类型
+            //var names = new[] { "Kayak", "Lifejacket", "Soccer ball" };
+            //return View(names);
+
+            var products = new[]
+            {
+                new { Name = "Kayak", Price = 275M },
+                new { Name = "Lifejacket", Price = 48.95M },
+                new { Name = "Soccer ball", Price = 19.50M },
+                new { Name = "Corner flag", Price = 34.95M }
+            };
+            return View(products.Select(p => p.GetType().Name));
         }
+
+        //lambda表达式方法。如果方法只有一行，可以简化为如下模式
+        //public ViewResult Index() => View(Product.GetProducts().Select(p => p?.Name));
 
         bool FilterByPrice(Product p)
         {
             return (p?.Price ?? 0) >= 20;
         }
 
+        public async Task<ViewResult> Index2()
+        {
+            long? length = await MyAsyncMethods.GetPageLength();
+            return View(new string[] { $"Length:{length}" });
+        }
 
         public IActionResult Privacy()
         {

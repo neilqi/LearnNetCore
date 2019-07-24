@@ -13,6 +13,9 @@ namespace LanguageFeatures.Models
         public Product Related { get; set; }
         public bool InStock { get; } = true;
 
+        //使用Lambda表达式定义属性
+        public bool NameBiginWithS => Name?[0] == 'S';
+
         public Product(bool stock = true)
         {
             InStock = stock;
