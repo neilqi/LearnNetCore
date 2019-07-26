@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Razor", "Razor\Razor.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkingWithVS", "WorkingWithVS\WorkingWithVS.csproj", "{F97E5681-4A8D-4A0E-B51B-1150949ACDF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{1B82C3B8-5552-4305-8104-1CF135726062}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest", "UnitTest\UnitTest.csproj", "{1B82C3B8-5552-4305-8104-1CF135726062}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTest", "XUnitTest\XUnitTest.csproj", "{6046A256-AD2B-447C-A700-0489F01C2AF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{1B82C3B8-5552-4305-8104-1CF135726062}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B82C3B8-5552-4305-8104-1CF135726062}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B82C3B8-5552-4305-8104-1CF135726062}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6046A256-AD2B-447C-A700-0489F01C2AF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6046A256-AD2B-447C-A700-0489F01C2AF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6046A256-AD2B-447C-A700-0489F01C2AF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6046A256-AD2B-447C-A700-0489F01C2AF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
