@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SportsStore.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace SportsStore
 {
@@ -31,10 +32,17 @@ namespace SportsStore
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddTransient<IProductRepository, FakeProductRepository>();
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                Configuration["Data:SportStoreProduct:ConnectionString"]));
+
+            services.AddTransient<IProductRepository, EFProductRepository>();
+            //services.AddTransient<IProductRepository, FakeProductRepository>();
             // 当某个组件，例如控制器，需要实现IProductRepository接口时，它将接受到一个FakeProductRepository对象的实例。
             // AddTransient方法表示每次IProductRepository接口被使用时都要创建一个新的FakeProductRepository对象
+
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,8 +66,9 @@ namespace SportsStore
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Product}/{action=List}/{id?}");
             });
+            SeedData.EnsurePopulated(app);
         }
     }
 }
