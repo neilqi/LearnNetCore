@@ -38,11 +38,22 @@ namespace SportsStore
                 Configuration["Data:SportStoreProduct:ConnectionString"]));
 
             services.AddTransient<IProductRepository, EFProductRepository>();
+
             //services.AddTransient<IProductRepository, FakeProductRepository>();
             // 当某个组件，例如控制器，需要实现IProductRepository接口时，它将接受到一个FakeProductRepository对象的实例。
             // AddTransient方法表示每次IProductRepository接口被使用时都要创建一个新的FakeProductRepository对象
-
+            services.AddTransient<IOrderRepository, EFOrderRepository>();
             services.AddTransient<ICountryService, CountryService>();
+            // 每次请求Cart时，SessionCart.GetCart将被触发。每次Cart类被使用时，都会从session中读取SessionCart对象。
+            // 使用lamda的好处，可以通过更灵活的方式创建对象，（比如根据需要组合出这个对象。本例中就是从session中获取，如果session中没有，就创建一个空的）
+            // 而不只是简单的映射（映射的作用相当于执行了一个new 方法）
+            services.AddScoped(sp => SessionCart.GetCart(sp));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            // Transient: 每个请求创建一次对象
+            // Scoped：   In ASP.NET Core applications, a scope is created around each server request. 一个客户端创建一个，类似于session
+            // Singleton: Specifies that a single instance of the service will be created. 一个应用服务只创建一个，所有客户端来的请求都用这个对象
+
             services.AddMvc();
             services.AddMemoryCache();
             services.AddSession();

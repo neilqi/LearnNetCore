@@ -8,6 +8,7 @@ namespace SportsStore.Models
 {
     public static class UrlExtensions
     {
+        // 调用方法 ViewContext.HttpContext.Request.PathAndQuery()
         public static string PathAndQuery(this HttpRequest request) =>
             request.QueryString.HasValue
             ? $"{request.Path}{request.QueryString}"
