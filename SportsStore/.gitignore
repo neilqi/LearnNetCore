@@ -22,6 +22,7 @@ bld/
 [Oo]bj/
 [Ll]og/
 [Ll]ib/
+bower_components/
 
 # Visual Studio 2015 cache/options directory
 .vs/
