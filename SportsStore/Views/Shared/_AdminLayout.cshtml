@@ -2,8 +2,17 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" asp-href-include="bower_components/bootstrap/dist/css/*.min.css" />
     <title>@ViewBag.Title</title>
+    <style>
+        .input-validation-error {
+            border-color: red;
+            background-color: #fee;
+        }
+    </style>
+    <link rel="stylesheet"
+          asp-href-include="/lib/bootstrap/dist/**/*.min.css"
+          asp-href-exclude="**/*-reboot*,**/*-grid*" />
+    <link rel="stylesheet" asp-href-include="/lib/fontawesome/css/*.css" />
 </head>
 <body class="m-1 p-1">
     <div class="bg-info p-2"><h4>@ViewBag.Title</h4></div>
