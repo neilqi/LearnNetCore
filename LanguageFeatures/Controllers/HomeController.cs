@@ -14,6 +14,7 @@ namespace LanguageFeatures.Controllers
         public IActionResult Index()
         {
             // 语法糖 ?  ?? 实例 字符串自动补全
+            // ？语法糖的目的是在对象使用前检查是否为null。如果对象为空，则赋值给变量为空值
             //List<string> results = new List<string>();
             //foreach (Product p in Product.GetProducts())
             //{
