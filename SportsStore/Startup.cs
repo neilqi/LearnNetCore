@@ -79,6 +79,12 @@ namespace SportsStore
             app.UseSession();
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name: null,
+                    template: "Admin/Edit/{ProductId:int}",
+                    defaults: new { Controller = "Admin", action = "Edit", ProductId = 1}
+                );
+
                 //特殊路由必须加到默认路由前面。
                 //特殊路由相当于解析出参数，然后按顺序执行到默认路由，完成页面加载
 
@@ -114,6 +120,7 @@ namespace SportsStore
                         productPage = 1
                     }
                 );
+
                 routes.MapRoute(name: null, template: "{controller}/{action}/{id?}");
             });
             SeedData.EnsurePopulated(app);

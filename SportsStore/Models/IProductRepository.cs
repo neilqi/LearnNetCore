@@ -12,5 +12,9 @@ namespace SportsStore.Models
         // 需要注意的是，每次枚举IQueryable对象时，都会查库
         // 在这种情况下，可以将IQuerable对象转为List或Array
         IQueryable<Product> Products { get; }
+
+        void SaveProduct(Product product);
+
+        Product DeleteProduct(int productID);
     }
 }
