@@ -10,6 +10,13 @@ namespace PartyInvites.Controllers
 {
     public class HomeController : Controller
     {
+        private IRepository repository;
+
+        public HomeController(IRepository repo)
+        {
+            repository = repo;
+        }
+
         public ViewResult Index()
         {
             int hour = DateTime.Now.Hour;
@@ -28,7 +35,7 @@ namespace PartyInvites.Controllers
         {
             if(ModelState.IsValid)
             {
-                Repository.AddResponse(guestResponse);
+                repository.AddResponse(guestResponse);
                 return View("Thanks", guestResponse);    
             }
             else
@@ -40,7 +47,7 @@ namespace PartyInvites.Controllers
 
         public ViewResult ListResponses()
         {
-            return View(Repository.Responses.Where(r => r.WillAttend == true));
+            return View(repository.Responses.Where(r => r.WillAttend == true));
         }
     }
 }

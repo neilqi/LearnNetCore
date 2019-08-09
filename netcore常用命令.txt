@@ -1,0 +1,22 @@
+# 创建站点：
+dotnet new [web|mvc|xunit] --language C# --framework netcoreapp2.0
+
+web 空web站点
+mvc 空web mvc站点
+xunit 测试站点
+
+    1.1 创建测试站点实例:
+    dotnet new xunit --language C# --framework netcoreapp2.0
+    dotnet add reference ../PartyInvites/PartyInvites.csproj
+
+# 添加引用
+dotnet add package System.Net.Http --version 4.3.2
+
+# 运行站点
+dotnet run
+
+# 重新编译站点
+dotnet restore
+
+# 创建数据迁移
+dotnet ef migrations add Initial

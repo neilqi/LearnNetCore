@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SportsStore.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace SportsStore
 {
@@ -36,6 +37,14 @@ namespace SportsStore
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                 Configuration["Data:SportStoreProduct:ConnectionString"]));
+
+            services.AddDbContext<AppIdentityDbContext>(options =>
+                options.UseSqlServer(
+                Configuration["Data:SportStoreIdentity:ConnectionString"]));
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDbContext>()
+                .AddDefaultTokenProviders();
 
             services.AddTransient<IProductRepository, EFProductRepository>();
 
@@ -65,18 +74,21 @@ namespace SportsStore
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseStatusCodePages();
             }
-            //else
-            //{
-            //    app.UseExceptionHandler("/Home/Error");
-            //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-            //    app.UseHsts();
-            //}
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                //app.UseHsts();
+            }
+
             //app.UseHttpsRedirection();
             //app.UseCookiePolicy();
             app.UseStaticFiles();            
             app.UseStatusCodePages();
             app.UseSession();
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -123,7 +135,8 @@ namespace SportsStore
 
                 routes.MapRoute(name: null, template: "{controller}/{action}/{id?}");
             });
-            SeedData.EnsurePopulated(app);
+            //SeedData.EnsurePopulated(app);
+            //IdentitySeedData.EnsurePopulated(app);
         }
     }
 }
